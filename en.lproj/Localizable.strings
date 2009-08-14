@@ -1,0 +1,32 @@
+/* Preview */
+"prv_title" = "Preview";
+
+/* Select Overlay */
+"prv_sel" = "Select Overlay";
+"ovr_sel" = "Select Overlay";
+
+/* Take Picture */
+"prv_cap" = "Take Pictures";
+
+/* Camera Required */
+"dlg_camreq" = "A Camera is required.";
+
+/* Ok (dialog) */
+"dlg_ok" = "Ok";
+
+/* Opacity */
+"prv_opacity" = "Opacity";
+
+/* Name (edit box placeholder) */
+"prv_name" = "Name";
+
+/* Image could not be saved */
+"dlg_imgerr" = "Image could not be saved.";
+
+/* Examples */
+"exm_thirds" = "Rule of Thirds";
+"exm_vanish1" = "Vanishing Point (One)";
+"exm_vanish2" = "Vanishing Point (Two)";
+"exm_iso1" = "Isometric (Portrait)";
+"exm_iso2" = "Isometric (Landscape)";
+
