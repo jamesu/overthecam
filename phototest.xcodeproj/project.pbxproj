@@ -14,6 +14,9 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* phototestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* phototestViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		3211ED6D106268AC00526A5E /* CameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3211ED6C106268AC00526A5E /* CameraOverlay.xib */; };
+		3211ED73106268BA00526A5E /* CameraOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3211ED72106268BA00526A5E /* CameraOverlayController.m */; };
+		3211EF671062978A00526A5E /* CameraButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3211EF661062978A00526A5E /* CameraButton.png */; };
 		324F4D3C100BFE470031F067 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 324F4D3A100BFE470031F067 /* Localizable.strings */; };
 		32612533100654EA005A0717 /* thirds.png in Resources */ = {isa = PBXBuildFile; fileRef = 32612532100654EA005A0717 /* thirds.png */; };
 		32612561100676F1005A0717 /* OverlayPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32612560100676F1005A0717 /* OverlayPickerController.m */; };
@@ -44,6 +47,10 @@
 		2899E5210DE3E06400AC0155 /* phototestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = phototestViewController.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3211ED6C106268AC00526A5E /* CameraOverlay.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CameraOverlay.xib; sourceTree = "<group>"; };
+		3211ED71106268BA00526A5E /* CameraOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOverlayController.h; sourceTree = "<group>"; };
+		3211ED72106268BA00526A5E /* CameraOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayController.m; sourceTree = "<group>"; };
+		3211EF661062978A00526A5E /* CameraButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CameraButton.png; sourceTree = "<group>"; };
 		324F4D3B100BFE470031F067 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		32612532100654EA005A0717 /* thirds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thirds.png; sourceTree = "<group>"; };
 		3261255F100676F1005A0717 /* OverlayPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayPickerController.h; sourceTree = "<group>"; };
@@ -129,6 +136,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3211EF661062978A00526A5E /* CameraButton.png */,
 				32E16748100CED0200BBCAE6 /* Default.png */,
 				32BDAEAA100CA7F000447387 /* isometric_1.png */,
 				32BDAEAB100CA7F000447387 /* isometric_2.png */,
@@ -145,6 +153,7 @@
 				2899E5210DE3E06400AC0155 /* phototestViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* phototest-Info.plist */,
+				3211ED6C106268AC00526A5E /* CameraOverlay.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -186,6 +195,8 @@
 			children = (
 				327112E81005159B00BE0D33 /* TestView.h */,
 				327112E91005159B00BE0D33 /* TestView.m */,
+				3211ED71106268BA00526A5E /* CameraOverlayController.h */,
+				3211ED72106268BA00526A5E /* CameraOverlayController.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -254,6 +265,8 @@
 				32BDAEAC100CA7F000447387 /* isometric_1.png in Resources */,
 				32BDAEAD100CA7F000447387 /* isometric_2.png in Resources */,
 				32E16749100CED0200BBCAE6 /* Default.png in Resources */,
+				3211ED6D106268AC00526A5E /* CameraOverlay.xib in Resources */,
+				3211EF671062978A00526A5E /* CameraButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +284,7 @@
 				3261261B1006802B005A0717 /* OverlayPreviewController.m in Sources */,
 				3261272110069C61005A0717 /* OverlayDesc.m in Sources */,
 				32FA55AF10071BAE008FD47A /* JUCellFactory.m in Sources */,
+				3211ED73106268BA00526A5E /* CameraOverlayController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

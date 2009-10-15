@@ -13,7 +13,7 @@
 
 @implementation TestView
 
-@synthesize theImage;
+@dynamic theImage;
 @synthesize defaultOpacity;
 
 - (id)initWithFrame:(CGRect)theFrame
@@ -23,6 +23,7 @@
         self.opaque = NO;
         self.backgroundColor = [UIColor clearColor];
         defaultOpacity = 1.0;
+        theImage = nil;
     }
     
     return self;
@@ -36,6 +37,20 @@
     self.alpha = visible ? defaultOpacity : 0.0;
     
     [UIView commitAnimations];
+}
+
+- (void)setTheImage:(UIImage*)aImage
+{
+    if (theImage)
+        [theImage release];
+    theImage = [aImage retain];
+    
+    [self setNeedsDisplay];
+}
+
+- (UIImage*)theImage
+{
+    return theImage;   
 }
 
 - (void)drawRect:(CGRect)theFrame

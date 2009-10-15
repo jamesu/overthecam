@@ -10,6 +10,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OverlayPickerController.h"
+#import "CameraOverlayController.h"
 
 @class TestView;
 @class OverlayDesc;
@@ -23,8 +24,7 @@
     OverlayDesc *overlay;
     NSString *docDir;
     
-    TestView *theView;
-    NSTimer *cameraTimer;
+    CameraOverlayController *overlayController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

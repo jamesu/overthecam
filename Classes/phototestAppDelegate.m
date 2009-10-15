@@ -84,6 +84,8 @@ bool viewContainsClass(UIView *root, const char *className, int offset)
     [control setTitle:locale forState:UIControlStateNormal];
     [control setTitle:locale forState:UIControlStateHighlighted];
     
+    overlayController = nil;
+    
     // Override point for customization after app launch    
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
@@ -92,14 +94,8 @@ bool viewContainsClass(UIView *root, const char *className, int offset)
 - (void)applicationWillTerminate:(UIApplication*)application
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (cameraTimer) {
-        [cameraTimer invalidate];
-        cameraTimer = nil;
-    }
     if (picker)
         [picker dismissModalViewControllerAnimated:NO];
-    if (theView)
-        [theView removeFromSuperview];
     [defaults synchronize];
 }
 
@@ -142,25 +138,33 @@ bool viewContainsClass(UIView *root, const char *className, int offset)
     
     picker = [[UIImagePickerController alloc] init];
     
+    CGAffineTransform trans = CGAffineTransformIdentity;
+    //trans = CGAffineTransformTranslate(trans, 50, -44);
+    //trans = CGAffineTransformScale(trans, 1.0, (480.0-44)/480.0);
+    
+    if (!overlayController) {
+        overlayController = [[CameraOverlayController alloc] initWithNibName:@"CameraOverlay" bundle:nil];
+    }
+    
     picker.allowsImageEditing = NO;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     picker.delegate = self;
+    picker.cameraViewTransform = trans;
+    picker.cameraOverlayView = overlayController.view;
     [viewController presentModalViewController:picker animated:YES];
     
     CGRect theFrame = window.frame;
     theFrame.origin.y += TOOLBAR_OFFSET;
     theFrame.size.height -= TOOLBAR_HEIGHT;
-    theView = [[TestView alloc] initWithFrame:theFrame];
-    theView.theImage = overlay.image;
-    theView.defaultOpacity = overlay.opacity;
-    theView.alpha = overlay.opacity;
-    [window addSubview:theView];
+    
+    overlayController.overlay = overlay;
+    overlayController.currentPicker = picker;
     camCheck = false;
     camRecheck = false;
     
-    cameraTimer = [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(checkCamera:) userInfo:nil repeats:YES];
+    picker.showsCameraControls = NO;
 }
-
+/*
 - (void)checkCamera:(NSTimer*)timer
 {
     bool hasCamera = true;
@@ -186,12 +190,14 @@ bool viewContainsClass(UIView *root, const char *className, int offset)
     else
         [theView animateVisibility:NO];
 }
+*/
 
 - (void)   savedPhotoImage:(UIImage *)image
   didFinishSavingWithError:(NSError *)error
                contextInfo:(void *)contextInfo
 {    
     NSString *message = nil;
+    overlayController.saving = NO;
     if (error) {
         message = [error localizedDescription];
     } else {
@@ -207,29 +213,24 @@ bool viewContainsClass(UIView *root, const char *className, int offset)
     [alert release];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)thePicker
-        didFinishPickingImage:(UIImage *)image
-                  editingInfo:(NSDictionary *)editingInfo
+- (void)imagePickerController:(UIImagePickerController *)thePicker 
+didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [viewController dismissModalViewControllerAnimated:NO];
-    [viewController presentModalViewController:thePicker animated:NO];
-    
-    UIImageWriteToSavedPhotosAlbum(image, 
+    UIImageWriteToSavedPhotosAlbum([info objectForKey:UIImagePickerControllerOriginalImage], 
                                    self,
                                    @selector(savedPhotoImage:didFinishSavingWithError:contextInfo:),
                                    NULL);
+    
+    overlayController.saving = YES;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)thePicker
 {
+    overlayController.saving = NO;
+    
     [viewController dismissModalViewControllerAnimated:thePicker ? YES : NO];
     [picker release];
     picker = nil;
-    [theView removeFromSuperview];
-    [theView release];
-    theView = nil;
-    [cameraTimer invalidate];
-    cameraTimer = nil;
 }
 
 
@@ -277,9 +278,7 @@ bool viewContainsClass(UIView *root, const char *className, int offset)
     [currentOverlay release];
     [overlay release];
     [viewController dismissModalViewControllerAnimated:NO];
-    if (picker) {
-        [theView release];
-    }
+    [overlayController release];
     [picker release];
     [viewController release];
     [window release];

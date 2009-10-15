@@ -11,6 +11,9 @@
 /* Camera Required */
 "dlg_camreq" = "A Camera is required.";
 
+/* Saving... */
+"sav_stat" = "Saving...";
+
 /* Ok (dialog) */
 "dlg_ok" = "Ok";
 
@@ -29,4 +32,5 @@
 "exm_vanish2" = "Vanishing Point (Two)";
 "exm_iso1" = "Isometric (Portrait)";
 "exm_iso2" = "Isometric (Landscape)";
+
 
